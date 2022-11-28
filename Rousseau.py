@@ -12,6 +12,20 @@ class tubo:
     self.x -= velocita
     screen.blit(tuboGiu, (self.x, self.y + 210))
     screen.blit(tuboSu, (self.x, self.y - 210))
+  def collisione(self, ross, rossx, rossy):
+    tolleranza = 5
+    rossLatoDx = rossx + ross.get_width() - tolleranza
+    rossLatoSx = rossx + tolleranza
+    tuboLatoDx = self.x + tuboGiu.get_width()
+    tuboLatoSx = self.x
+    rossLatoSu = rossy + tolleranza
+    rossLatoGiu = rossy + ross.get_height() - tolleranza
+    tuboLatoSu = self.y + 110
+    tuboLatoGiu = self.y + 210
+    if rossLatoDx > tuboLatoSx and rossLatoSx < tuboLatoDx:
+      if rossLatoSu < tuboLatoSu or rossLatoGiu > tuboLatoSu:
+        lose()
+
 
 def init():
   global rossx, rossy, rossVely
@@ -75,6 +89,8 @@ while True:
       rossVely = -10
   if tubi[-1].x < 150:
     tubi.append(tubo())
+  for t in tubi:
+    t.collisione(ross, rossx, rossy)
     if event.type == pygame.QUIT:
       pygame.quit()
   if rossy > 380:
