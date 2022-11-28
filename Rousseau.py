@@ -4,15 +4,29 @@ import random
 import pygame
 from pygame.locals import *
 
+class tubo:
+  def __init__(self):
+    self.x = 300
+    self.y = random.randint(-75, 150)
+  def avanza(self):
+    self.x -= velocita
+    screen.blit(tuboGiu, (self.x, self.y + 210))
+    screen.blit(tuboSu, (self.x, self.y - 210))
+
 def init():
   global rossx, rossy, rossVely
   global basex 
+  global tubi
   rossx,rossy = 60,150
   rossVely = 0
   basex = 0
+  tubi = []
+  tubi.append(tubo())
 
 def draw():
   screen.blit(sfondo, (0,0))
+  for t in tubi:
+    t.avanza()
   screen.blit(ross, (rossx, rossy))
   screen.blit(base, (basex,400))
 
@@ -59,6 +73,8 @@ while True:
   for event in pygame.event.get():
     if (event.type == pygame.KEYDOWN and event.key == pygame.K_UP):
       rossVely = -10
+  if tubi[-1].x < 150:
+    tubi.append(tubo())
     if event.type == pygame.QUIT:
       pygame.quit()
   if rossy > 380:
