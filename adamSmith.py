@@ -1,8 +1,6 @@
 
 import pygame
 import random
-
-#try
 class nemico:
     def __init__(self):
         nemico.x = random.randint(0,360)
