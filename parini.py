@@ -12,6 +12,8 @@ def draw():
     screen.blit(contadino, (720, contadinoY))
     palla = pygame.Rect(pallax,pallaY,20,20)
     pygame.draw.rect(screen, (255,255,255), palla)
+    s_render = font.render(s, 1, (255,255,255))
+    screen.blit(s_render, (0,0))
 
 def init():
     global nobileY, contadinoY
@@ -34,16 +36,17 @@ bigNobile = pygame.image.load('img/nobile.jfif')
 bigContadino = pygame.image.load('img/contadino.jpg')
 nobile = pygame.transform.scale(bigNobile, (imgWidth, imgHeight))
 contadino = pygame.transform.scale(bigContadino, (imgWidth, imgHeight))
+font = pygame.font.SysFont('Comic Sans MS', 12, bold=True)
+global s 
+s = 'il nobile e il contadino stanno litigando nella tomba, chi vincerà lo scontro?'
 dx = 5
 dy = 5
 
 while True:
-    # Move the bal
+
     pallax += dx
     pallaY += dy
-    # Border checking
 
-    # Top and bottom
     if pallaY > 580:
         pallaY=580
         dy *= -1
@@ -52,19 +55,18 @@ while True:
         pallaY = 0
         dy *= -1
 
-    # Left and right
     if pallax  + 20 > 800:
         dx *= -1
 
     elif pallax < 0:
         dx *= -1
 
-    # Paddle and ball collisions
-    if pallax < 80 and pallaY <  nobileY and pallaY > nobileY + 120:
+    if pallax < 80 and pallaY > nobileY and pallaY < nobileY + 120:
         dx *= -1 
 
-    elif pallax > 720 and pallaY <  contadinoY and pallaY > contadinoY + 120:
+    elif pallax > 700 and pallaY >  contadinoY and pallaY < contadinoY + 120:
         dx *= -1 
+     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
