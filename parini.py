@@ -33,12 +33,12 @@ imgWidth = 80
 screen = pygame.display.set_mode((width, height))
 fps = 60
 bigNobile = pygame.image.load('img/nobile.jfif')
-bigContadino = pygame.image.load('img/contadino.jpg')
+bigContadino = pygame.image.load('img/poeta.webp')
 nobile = pygame.transform.scale(bigNobile, (imgWidth, imgHeight))
 contadino = pygame.transform.scale(bigContadino, (imgWidth, imgHeight))
 font = pygame.font.SysFont('Comic Sans MS', 12, bold=True)
 global s 
-s = 'il nobile e il contadino stanno litigando nella tomba, chi vincerà lo scontro?'
+s = 'il nobile e il poeta stanno litigando nella tomba, chi vincerà lo scontro?'
 dx = 5
 dy = 5
 
